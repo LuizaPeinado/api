@@ -9,9 +9,9 @@ export class UserService {
   constructor(private http: HttpClient) {}
 
   getAll() {
-    return this.http.get<any>('http://192.168.15.14:3000/users');
+    return this.http.get<any>('http://localhost:3000/users');
   }
   createUser(user: User) {
-    return this.http.post(`http://192.168.15.14:3000/users`, user);
+    return this.http.post(`http://localhost:3000/users`, user);
   }
 }

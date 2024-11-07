@@ -10,9 +10,9 @@ export class HotelService {
   constructor(private http:HttpClient) { }
 
   getAllHotel(){
-    return this.http.get<any>("http://192.168.15.14:3000/hotel")
+    return this.http.get<any>("http://localhost:3000/hotel")
   }
   createUser(hotel:Hotel){
-    return this.http.post(`http://192.168.15.14:3000/hotel`,hotel)
+    return this.http.post(`http://localhost:3000/hotel`,hotel)
   }
 }
