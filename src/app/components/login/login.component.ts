@@ -40,6 +40,7 @@ export class LoginComponent {
     this.userService.getAll().subscribe({
       next: (data) => {
         this.allUsers = data.data;
+        console.log("Get users deu certo doido",this.allUsers)
       },
       error: (err) => {console.log(err)
         console.log("Deu erro, doido",err)
@@ -55,6 +56,7 @@ export class LoginComponent {
       ) {
         localStorage.setItem('angularToken', this.allUsers[i].id!.toString());
         this.route.navigateByUrl('/home');
+        console.log("Esse usuario tem hein")
         this.userForm.reset();
         return;
       }
