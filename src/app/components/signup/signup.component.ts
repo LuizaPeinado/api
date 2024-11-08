@@ -12,6 +12,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
+import { HotelService } from '../../services/hotel-service';
 
 @Component({
   selector: 'app-signup',
@@ -26,6 +27,7 @@ export class SignupComponent {
   allUsers: User[] = [];
   fb = inject(FormBuilder);
   router = inject(Router);
+  hotelService = inject(HotelService)
 
   constructor(private userService: UserService) {}
 
@@ -40,6 +42,10 @@ export class SignupComponent {
       this.allUsers = data;
       console.log(this.allUsers);
     });
+    this.hotelService.getAllHotel().subscribe({
+      next: (data) => console.log(data),
+      error: (err) => console.log(err)
+    })
   }
   onSubmit(): void {
     this.create();
