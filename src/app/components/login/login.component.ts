@@ -39,7 +39,7 @@ export class LoginComponent {
   ngOnInit() {
     this.userService.getAll().subscribe({
       next: (data) => {
-        this.allUsers = data.data;
+        this.allUsers = data;
         console.log("Get users deu certo doido",this.allUsers)
       },
       error: (err) => {console.log(err)
