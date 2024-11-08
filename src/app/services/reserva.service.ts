@@ -11,9 +11,9 @@ export class ReservaHotel {
   constructor(private http:HttpClient) { }
 
   getAllReserva(){
-    return this.http.get<any>("http://localhost:3000/reservas")
+    return this.http.get<any>("https://10.0.2.2:3000/reservas")
   }
   createReserva(reserva:Reserva){
-    return this.http.post(`http://localhost:3000/reservas`,reserva)
+    return this.http.post(`https://10.0.2.2:3000//reservas`,reserva)
   }
 }
