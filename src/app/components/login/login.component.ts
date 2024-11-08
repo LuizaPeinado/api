@@ -26,7 +26,7 @@ export class LoginComponent {
   allUsers: User[] = [];
   fb = inject(FormBuilder);
   route = inject(Router);
-  idUser:Number = 0
+  idUser: Number = 0;
 
   constructor(private userService: UserService) {}
 
@@ -37,9 +37,13 @@ export class LoginComponent {
   });
 
   ngOnInit() {
-    console.log('FUNfou');
-    this.userService.getAll().subscribe((data) => {
-      this.allUsers = data.data;
+    this.userService.getAll().subscribe({
+      next: (data) => {
+        this.allUsers = data.data;
+      },
+      error: (err) => {console.log(err)
+        console.log("Deu erro, doido",err)
+      }
     });
   }
 
@@ -56,6 +60,5 @@ export class LoginComponent {
       }
     }
     this.userForm.reset();
-    console.log('err');
   }
 }
