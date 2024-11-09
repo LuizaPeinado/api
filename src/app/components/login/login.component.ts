@@ -27,7 +27,7 @@ export class LoginComponent {
   fb = inject(FormBuilder);
   route = inject(Router);
   idUser: Number = 0;
-  
+
 
   constructor(private userService: UserService) {}
 
@@ -40,7 +40,7 @@ export class LoginComponent {
   ngOnInit() {
     this.userService.getAll().subscribe({
       next: (data) => {
-        this.allUsers = data;
+        this.allUsers = data.data;
         console.log("Get users deu certo doido",this.allUsers)
       },
       error: (err) => {console.log(err)

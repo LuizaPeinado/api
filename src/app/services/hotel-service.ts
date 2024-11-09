@@ -10,9 +10,9 @@ export class HotelService {
   constructor(private http:HttpClient) { }
 
   getAllHotel(){
-    return this.http.get<any>("https://339b-2804-7f0-9281-aba4-1d2c-cbf3-291c-e171.ngrok-free.app/hotel")
+    return this.http.get<any>("https://5282-2804-7f0-9281-aba4-1d2c-cbf3-291c-e171.ngrok-free.app/hotel")
   }
   createUser(hotel:Hotel){
-    return this.http.post(`https://339b-2804-7f0-9281-aba4-1d2c-cbf3-291c-e171.ngrok-free.app/hotel`,hotel)
+    return this.http.post(`https://5282-2804-7f0-9281-aba4-1d2c-cbf3-291c-e171.ngrok-free.app/hotel`,hotel)
   }
 }

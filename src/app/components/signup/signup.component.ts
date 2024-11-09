@@ -39,8 +39,8 @@ export class SignupComponent {
 
   ngOnInit() {
     this.userService.getAll().subscribe((data) => {
+      this.allUsers = data.data;
       console.log(this.allUsers);
-      this.allUsers = data;
     });
     this.hotelService.getAllHotel().subscribe({
       next: (data) => console.log(data),
