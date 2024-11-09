@@ -89,7 +89,7 @@ export class UserPageComponent {
   getAllUsers() {
     this.userService.getAll().subscribe({
       next: (data) => {
-        this.allUsers = data.data;
+        this.allUsers = data;
         this.getUsername();
       },
       error: (err) => console.log(err),
