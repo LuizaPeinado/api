@@ -27,6 +27,7 @@ export class LoginComponent {
   fb = inject(FormBuilder);
   route = inject(Router);
   idUser: Number = 0;
+  
 
   constructor(private userService: UserService) {}
 
