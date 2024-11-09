@@ -17,18 +17,19 @@ export class UserService {
     return this.http.post(this.url, user);
   }
   getHotels() {
-    return this.http.get(this.url, { observe: 'response' }).pipe(
+    return this.http.get(this.url, { responseType: 'text' as 'json' }).pipe(
       catchError(this.handleError)
     ).subscribe(response => {
-      const contentType = response.headers.get('Content-Type');
-
-      if (contentType && contentType.includes('application/json')) {
-        console.log('Resposta JSON:', response.body);
-      } else {
-        console.warn('Resposta HTML ou outro tipo:', response.body);
+      try {
+        // Tenta fazer o parse para JSON
+        const data = JSON.parse(response as string);
+        console.log('Resposta JSON:', data);
+      } catch (e) {
+        console.warn('Resposta não está no formato JSON:', response);
       }
     });
   }
+  
 
     // Tratamento de erros
     private handleError(error: HttpErrorResponse) {
