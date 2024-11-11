@@ -8,7 +8,7 @@ import { Reserva } from '../interfaces/reserva';
 })
 export class ReservaHotel {
 
-  private url = 'https://d924-2804-7f0-9281-aba4-1d2c-cbf3-291c-e171.ngrok-free.app/reservas'
+  private url = 'https://2c2d-2804-7f0-9281-aba4-1d2c-cbf3-291c-e171.ngrok-free.app/reservas'
 
   constructor(private http:HttpClient) { }
 

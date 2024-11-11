@@ -42,10 +42,6 @@ export class SignupComponent {
       this.allUsers = data.data;
       console.log(this.allUsers);
     });
-    this.hotelService.getAllHotel().subscribe({
-      next: (data) => console.log(data),
-      error: (err) => console.log(err)
-    })
   }
   onSubmit(): void {
     this.create();

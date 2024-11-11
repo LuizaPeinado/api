@@ -69,7 +69,6 @@ export class UserPageComponent {
           if (this.allHotel[j].id === this.allReservas[i].idHotel) {
             this.userHoteis.push(this.allHotel[j]);
           }else{
-            console.log("Não achoou")
           }
         }
       }
@@ -82,7 +81,6 @@ export class UserPageComponent {
         console.log("Achooo")
         this.userName = this.allUsers[i].name;
       }else{
-        console.log("Não encontrado")
       }
     }
   }

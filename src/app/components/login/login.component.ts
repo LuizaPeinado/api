@@ -38,7 +38,6 @@ export class LoginComponent {
   });
 
   ngOnInit() {
-    this.userService.getHotels()
     this.userService.getAll().subscribe({
       next: (data) => {
         this.allUsers = data.data;
