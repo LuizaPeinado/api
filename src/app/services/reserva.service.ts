@@ -11,9 +11,9 @@ export class ReservaHotel {
   constructor(private http:HttpClient) { }
 
   getAllReserva(){
-    return this.http.get<any>("https://5282-2804-7f0-9281-aba4-1d2c-cbf3-291c-e171.ngrok-free.app/reservas")
+    return this.http.get<any>("https://d924-2804-7f0-9281-aba4-1d2c-cbf3-291c-e171.ngrok-free.app/reservas")
   }
   createReserva(reserva:Reserva){
-    return this.http.post(`https://5282-2804-7f0-9281-aba4-1d2c-cbf3-291c-e171.ngrok-free.app/reservas`,reserva)
+    return this.http.post(`https://d924-2804-7f0-9281-aba4-1d2c-cbf3-291c-e171.ngrok-free.app/reservas`,reserva)
   }
 }
