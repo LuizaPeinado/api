@@ -17,32 +17,34 @@
         Recommended
       </span>
     </div>
-    @for (hotel of hoteisFiltrados; track $index) {
-      <div class="card" [routerLink]="'/reserva'" [queryParams]="{id:hotel.id}">
-        <div class="name">
-          <span>{{hotel.local}}</span>
-        </div>
-        <div class="status">
-          <span>{{hotel.status}}</span>
-        </div>
-        <div class="img">
+    @if (isLoadign) {
+      <span>Carregando...</span>
+    }
+    @else if (!isLoadign) {
 
-          <img
-          src={{hotel.url}}
-          alt=""
-          />
+      @for (hotel of hoteisFiltrados; track $index) {
+        <div class="card" [routerLink]="'/reserva'" [queryParams]="{id:hotel.id}">
+          <div class="name">
+            <span>{{hotel.local}}</span>
+          </div>
+          <div class="status">
+            <span>{{hotel.status}}</span>
+          </div>
+          <div class="img">
+            
+            <img
+            src={{hotel.url}}
+            alt=""
+            />
+          </div>
+      
+          <div class="stars">
+                  <span class="star" *ngFor="let isFilled of getStarsArray(hotel.stars)" [ngClass]="{ 'filled': isFilled }">★</span>
+          </div>
         </div>
-        <div class="stars">
-          <fa-icon [icon]="faStar"></fa-icon>
-          <fa-icon [icon]="faStar"></fa-icon>
-          <fa-icon [icon]="faStar"></fa-icon>
-          <fa-icon [icon]="faStar"></fa-icon>
-          <fa-icon [icon]="faStar"></fa-icon>
-
-        </div>
-      </div>
-    }@empty {
-      <span>Nenhum hotel encontrado...</span>
+      }@empty {
+        <span>Nenhum hotel encontrado...</span>
+      }
     }
   </div>
 </div>

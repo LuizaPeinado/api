@@ -86,6 +86,9 @@
         color: white;
         height: 30px;
         box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.349);
+        &.off{
+          background-color: red;
+        }
       }
       .status{
         bottom: 30px;

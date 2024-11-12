@@ -98,6 +98,16 @@
         right: 10px;
         background-color: $status;
       }
+      .stars{
+        display: flex;
+        .star {
+          color: #b4b4b4; /* Cor para as estrelas vazias */
+          font-size: 20px;
+        }
+        .star.filled {
+          color: #FFD700; /* Cor para as estrelas preenchidas */
+        }
+      }
     }
   }
 }

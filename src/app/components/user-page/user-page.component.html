@@ -1,38 +1,42 @@
 <div class="container">
   <div class="content">
-      <div class="header">
-        <h1>{{userName}}</h1>
-        <p>Hortolandia - sp</p>
-        <div class="menu">
-          <fa-icon [icon]="faRightFromBracket" (click)="logout()"></fa-icon>
-        </div>
-        <div class="user" routerLink="/home">
-          <fa-icon [icon]="faArrowLeft"></fa-icon>
-        </div>
+    <div class="header">
+      <h1>{{ userName }}</h1>
+      <p>Hortolandia - sp</p>
+      <div class="menu">
+        <fa-icon [icon]="faRightFromBracket" (click)="logout()"></fa-icon>
       </div>
+      <div class="user" routerLink="/home">
+        <fa-icon [icon]="faArrowLeft"></fa-icon>
+      </div>
+    </div>
 
     <div class="title">
-      <span>
-        Reservas
-      </span>
+      <span> Reservas </span>
     </div>
-    @for (hotel of userHoteis; track $index) {
-      <div class="card">
-          <div class="name">
-          <span>{{hotel.local}}</span>
-        </div>
-      <div class="status">
-        <span>{{hotel.status}}</span>
-      </div>
-      <div class="img">
+ @for (reserva of userReservas;
+    track $index) {
 
-        <img
-        src={{hotel.url}}
-        alt=""
-        />
+
+    <div class="card">
+      <div class="name">
+        <span>{{ reserva.local }}</span>
+      </div>
+      @if (reserva.date >= formattedDate) {
+      <div class="status">
+        <span>disponivel</span>
+      </div>
+      }@else{
+      <div class="status off">
+        <span>Indisponivel</span>
+      </div>
+
+      }
+      <div class="img">
+        <img src="{{ reserva.url }}" alt="" />
       </div>
       <div class="stars"></div>
     </div>
-  }
+    } 
   </div>
 </div>

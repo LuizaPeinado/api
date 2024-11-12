@@ -5,11 +5,12 @@ import { faSearch,faUser,faStar } from '@fortawesome/free-solid-svg-icons';
 import { HotelService } from '../../services/hotel-service';
 import { Hotel } from '../../interfaces/hotel';
 import { FormBuilder, FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [FontAwesomeModule,RouterLink,ReactiveFormsModule],
+  imports: [FontAwesomeModule,RouterLink,ReactiveFormsModule,CommonModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
@@ -21,7 +22,7 @@ export class HomeComponent {
   hotelService = inject(HotelService)
   router= inject(Router)
   form = inject(FormBuilder)
-
+  isLoadign = false
   hoteisFiltrados: Hotel[] = []
   filtro = new FormControl('')
 
@@ -49,16 +50,26 @@ export class HomeComponent {
     })
   }
   getAllHotel(){
+    this.isLoadign = true
     this.hotelService.getAllHotel().subscribe({
       next:(data)=>{this.allHotel = data.data
         console.log(this.allHotel)
         this.filter()
 
-      },error:(err) => console.log(err)
+      },error:(err) => console.log(err),
+      complete: () =>{
+        this.isLoadign = false
+      }
     })
   }
   openCard(hotelId: number){
     // const hotelString = hotelId.toString()
     this.router.navigate(['/reserva',hotelId])
   }
+  getStarsArray(stars: number): boolean[] {
+    return Array(5)
+      .fill(false)
+      .map((_, index) => index < stars);
+  }
+  
 }
