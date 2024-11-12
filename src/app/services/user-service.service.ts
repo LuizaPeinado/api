@@ -8,7 +8,7 @@ import { catchError, throwError } from 'rxjs';
 })
 export class UserService {
   constructor(private http: HttpClient) {}
-  private url = 'https://9a6a-2804-389-77-bc4e-8cf2-d3b4-4466-31c2.ngrok-free.app/users'
+  private url = 'https://afd5-2804-214-90e3-6d5-c0c6-61bc-579d-2638.ngrok-free.app/users'
 
   getAll() {
     const headers = new HttpHeaders({
