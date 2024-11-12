@@ -4,10 +4,10 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faSearch, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { HotelService } from '../../services/hotel-service';
 import { Hotel } from '../../interfaces/hotel';
-import {MatDatepickerModule} from '@angular/material/datepicker';
-import {MatInputModule} from '@angular/material/input';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {provideNativeDateAdapter} from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { provideNativeDateAdapter } from '@angular/material/core';
 
 import {
   FormBuilder,
@@ -21,7 +21,15 @@ import { CommonModule } from '@angular/common';
   selector: 'app-content-page',
   standalone: true,
   providers: provideNativeDateAdapter(),
-  imports: [FontAwesomeModule, RouterLink, ReactiveFormsModule,CommonModule,MatFormFieldModule, MatInputModule, MatDatepickerModule],
+  imports: [
+    FontAwesomeModule,
+    RouterLink,
+    ReactiveFormsModule,
+    CommonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatDatepickerModule,
+  ],
   templateUrl: './content-page.component.html',
   styleUrl: './content-page.component.scss',
 })
@@ -38,7 +46,7 @@ export class ContentPageComponent implements OnInit {
   idUser = localStorage.getItem('angularToken')!;
 
   form = this.fb.group({
-    date: [],
+    date: '',
   });
 
   ngOnInit() {
@@ -51,11 +59,11 @@ export class ContentPageComponent implements OnInit {
     });
   }
   foundHotel(id: any) {
-    id = Number(id)
+    id = Number(id);
     for (let i = 0; this.allHotel.length > i; i++) {
-      console.log(this.allHotel[i].id, id)
-      if(this.allHotel[i].id === id){
-        this.hotelSelected.push(this.allHotel[i])
+      console.log(this.allHotel[i].id, id);
+      if (this.allHotel[i].id === id) {
+        this.hotelSelected.push(this.allHotel[i]);
       }
     }
   }
@@ -63,18 +71,26 @@ export class ContentPageComponent implements OnInit {
   getAllHotel() {
     this.hotelService.getAllHotel().subscribe((response) => {
       this.allHotel = response.data;
-      console.log(this.allHotel[0])
+      console.log(this.allHotel[0]);
       this.getId();
     });
   }
   reservar() {
-    const id = Number(this.idUser)
-    const idHotel = Number(this.hotelId)
+    const id = Number(this.idUser);
+    const idHotel = Number(this.hotelId);
+    const dateValue:any = this.form.value.date!
+
+    // Verifica se `dateValue` é uma instância de Date
+    const dataFormatada =
+      dateValue instanceof Date
+        ? dateValue.toISOString().split('T')[0] // Formata para "yyyy-MM-dd"
+        : dateValue.split('T')[0]; // Caso já seja string, apenas usa o split
+
     this.reservaService
       .createReserva({
-        idUser:id,
-        idHotel:idHotel,
-        date: this.form.value.date!
+        idUser: id,
+        idHotel: idHotel,
+        date: dataFormatada,
       })
       .subscribe({
         next: (data) => {

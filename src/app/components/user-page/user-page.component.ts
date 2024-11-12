@@ -12,10 +12,11 @@ import { HotelService } from '../../services/hotel-service';
 import { Hotel } from '../../interfaces/hotel';
 import { User } from '../../interfaces/user';
 import { UserService } from '../../services/user-service.service';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 @Component({
   selector: 'app-user-page',
   standalone: true,
-  imports: [FontAwesomeModule, RouterLink],
+  imports: [FontAwesomeModule, RouterLink,MatProgressSpinnerModule],
   templateUrl: './user-page.component.html',
   styleUrl: './user-page.component.scss',
 })
@@ -33,6 +34,8 @@ export class UserPageComponent {
   allHotel: Hotel[] = [];
   allUsers: User[] = [];
   reservasTratado:any =[]
+  isLoadign = false
+
   idUser = localStorage.getItem('angularToken');
   userName: string = '';
    today = new Date()
@@ -56,44 +59,50 @@ export class UserPageComponent {
           const formattedDate = `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
           this.reservasTratado[i].date = formattedDate
         }
+        this.getAllHotel();
+        this.getAllUsers();
       },
       error: (err) => console.log(err),
     });
-    this.getAllHotel();
-    this.getAllUsers();
+ 
 
   }
   getAllHotel() {
+    this.isLoadign = true
+
     this.hotelService.getAllHotel().subscribe({
       next: (data) => {
         this.allHotel = data.data;
         this.userReserva();
       },
       error: (err) => console.log(err),
+      complete:  ()=> this.isLoadign = false
+
     });
   }
   userReserva() {
     this.userHoteis = [];
     this.userReservas = [];
     const id = Number(this.idUser);
+
     for (let i = 0; this.allReservas.length > i; i++) {
+      console.log("aqui")
       if (this.allReservas[i].idUser === id) {
         this.userReservas.push(this.allReservas[i]);
         for (let j = 0; this.allHotel.length > j; j++) {
           if (this.allHotel[j].id === this.allReservas[i].idHotel) {
             this.userHoteis.push(this.allHotel[j]);
-          } else {
-          }
+          } 
         }
       }
     }
     for(let i = 0;this.userReservas.length > i; i++){
       this.userReservas[i] = {"id": this.userReservas[i].id,"idUser":this.userReservas[i].idUser,"idHotel":this.userReservas[i].idHotel,"url":this.userHoteis[i].url,"local":this.userHoteis[i].local,"date":this.userReservas[i].date}
     }
+    console.log(this.userReservas)
   }
   getUsername() {
     const id = Number(this.idUser);
-    console.log(localStorage.getItem("angularToken"))
     for (let i = 0; this.allUsers.length > i; i++) {
       if (this.allUsers[i].id === id) {
         console.log('Achooo');

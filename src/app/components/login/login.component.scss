@@ -32,6 +32,7 @@
     h1 {
       color: $primary;
       font-size: 3rem;
+      margin-bottom: 50px;
     }
     form {
       width: 400px;
@@ -40,14 +41,13 @@
       align-items: center;
       position: relative;
       justify-content: center;
-
+      gap: 20px;
 
       
       input[type="text"],
       input[type="password"] {
         border: none;
         width: 200px;
-        // border-bottom: 2px solid $primary;
         background-color: transparent !important;
         padding: 5px;
         &:focus {
@@ -83,7 +83,6 @@
         border: none;
         background-color: $primary;
         color: white;
-        margin-top: 50px;
         &:hover {
           cursor: pointer;
           opacity: 0.8;

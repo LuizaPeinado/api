@@ -15,27 +15,34 @@
       <span> Reservas </span>
     </div>
     <div class="card_container">
-      @for (reserva of userReservas; track $index) {
+      @if (isLoadign) {
+        <mat-spinner></mat-spinner>
+  
+      }
+      @else if (!isLoadign) {
 
-      <div class="card">
-        <div class="name">
-          <span>{{ reserva.local }}</span>
-        </div>
-        @if (reserva.date >= formattedDate) {
-        <div class="status">
-          <span>disponivel</span>
-        </div>
-        }@else{
-        <div class="status off">
-          <span>Indisponivel</span>
-        </div>
-
+        @for (reserva of userReservas; track $index) {
+          
+          <div class="card">
+            <div class="name">
+              <span>{{ reserva.local }}</span>
+            </div>
+            @if (reserva.date >= formattedDate) {
+              <div class="status">
+                <span>disponivel</span>
+              </div>
+            }@else{
+              <div class="status off">
+                <span>Indisponivel</span>
+              </div>
+              
+            }
+            <div class="img">
+              <img src="{{ reserva.url }}" alt="" />
+            </div>
+            <div class="stars"></div>
+          </div>
         }
-        <div class="img">
-          <img src="{{ reserva.url }}" alt="" />
-        </div>
-        <div class="stars"></div>
-      </div>
       }
     </div>
   </div>

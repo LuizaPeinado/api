@@ -29,9 +29,9 @@ export class HomeComponent {
   filtro = new FormControl('')
 
   ngOnInit(){
-
     this.getAllHotel()
   }
+  
   filter(){
     if(this.filtro.value === '' || null){
       this.hoteisFiltrados = this.allHotel
@@ -55,7 +55,6 @@ export class HomeComponent {
     this.isLoadign = true
     this.hotelService.getAllHotel().subscribe({
       next:(data)=>{this.allHotel = data.data
-        console.log(this.allHotel)
         this.filter()
 
       },error:(err) => console.log(err),
@@ -65,7 +64,6 @@ export class HomeComponent {
     })
   }
   openCard(hotelId: number){
-    // const hotelString = hotelId.toString()
     this.router.navigate(['/reserva',hotelId])
   }
   getStarsArray(stars: number): boolean[] {
