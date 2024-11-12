@@ -45,12 +45,10 @@
     input[type="text"],input[type="password"]{
       border: none;
       width: 200px;
-      border-bottom: 2px solid $primary;
       background-color: transparent;
       padding: 5px;
       &:focus{
         outline: none;
-        border-bottom: 2px solid $hover;
       }
     }
     .icon{
@@ -101,6 +99,12 @@
   .link{
     cursor: pointer;
   }
+}
+
+::ng-deep .mat-mdc-form-field{
+  --mdc-filled-text-field-caret-color:rgb(65, 77, 147);
+  --mdc-filled-text-field-input-text-placeholder-color:rgb(152, 152, 152);
+  --mdc-filled-text-field-container-color:rgba(235, 27, 27, 0);
 }
 
 @media (width <= 815px) {

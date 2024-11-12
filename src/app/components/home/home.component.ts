@@ -6,11 +6,13 @@ import { HotelService } from '../../services/hotel-service';
 import { Hotel } from '../../interfaces/hotel';
 import { FormBuilder, FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [FontAwesomeModule,RouterLink,ReactiveFormsModule,CommonModule],
+  imports: [FontAwesomeModule,RouterLink,ReactiveFormsModule,CommonModule,MatProgressSpinnerModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })

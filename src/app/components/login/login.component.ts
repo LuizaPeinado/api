@@ -3,12 +3,18 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faUser, faLock } from '@fortawesome/free-solid-svg-icons';
 import { UserService } from '../../services/user-service.service';
 import { User } from '../../interfaces/user';
+import { ErrorStateMatcher } from '@angular/material/core';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+
 import {
   FormBuilder,
   FormControl,
   FormGroup,
   FormsModule,
+  NgForm,
   ReactiveFormsModule,
+  FormGroupDirective,
   Validators,
 } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
@@ -16,7 +22,7 @@ import { Router, RouterLink } from '@angular/router';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FontAwesomeModule, ReactiveFormsModule, RouterLink],
+  imports: [FontAwesomeModule, ReactiveFormsModule, RouterLink,MatFormFieldModule, MatInputModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
 })
@@ -28,7 +34,6 @@ export class LoginComponent {
   route = inject(Router);
   idUser: Number = 0;
 
-
   constructor(private userService: UserService) {}
 
   userForm = this.fb.group({
@@ -37,15 +42,18 @@ export class LoginComponent {
     password: new FormControl<string>('', [Validators.required]),
   });
 
+  matcher = new MyErrorStateMatcher();
+
   ngOnInit() {
     this.userService.getAll().subscribe({
       next: (data) => {
         this.allUsers = data.data;
-        console.log("Get users deu certo doido",this.allUsers)
+        console.log('Get users deu certo doido', this.allUsers);
       },
-      error: (err) => {console.log(err)
-        console.log("Deu erro, doido",err)
-      }
+      error: (err) => {
+        console.log(err);
+        console.log('Deu erro, doido', err);
+      },
     });
   }
 
@@ -57,11 +65,24 @@ export class LoginComponent {
       ) {
         localStorage.setItem('angularToken', this.allUsers[i].id!.toString());
         this.route.navigateByUrl('/home');
-        console.log("Esse usuario tem hein")
+        console.log('Esse usuario tem hein');
         this.userForm.reset();
         return;
       }
     }
     this.userForm.reset();
+  }
+}
+export class MyErrorStateMatcher implements ErrorStateMatcher {
+  isErrorState(
+    control: FormControl | null,
+    form: FormGroupDirective | NgForm | null
+  ): boolean {
+    const isSubmitted = form && form.submitted;
+    return !!(
+      control &&
+      control.invalid &&
+      (control.dirty || control.touched || isSubmitted)
+    );
   }
 }

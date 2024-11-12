@@ -14,29 +14,29 @@
     <div class="title">
       <span> Reservas </span>
     </div>
- @for (reserva of userReservas;
-    track $index) {
+    <div class="card_container">
+      @for (reserva of userReservas; track $index) {
 
+      <div class="card">
+        <div class="name">
+          <span>{{ reserva.local }}</span>
+        </div>
+        @if (reserva.date >= formattedDate) {
+        <div class="status">
+          <span>disponivel</span>
+        </div>
+        }@else{
+        <div class="status off">
+          <span>Indisponivel</span>
+        </div>
 
-    <div class="card">
-      <div class="name">
-        <span>{{ reserva.local }}</span>
+        }
+        <div class="img">
+          <img src="{{ reserva.url }}" alt="" />
+        </div>
+        <div class="stars"></div>
       </div>
-      @if (reserva.date >= formattedDate) {
-      <div class="status">
-        <span>disponivel</span>
-      </div>
-      }@else{
-      <div class="status off">
-        <span>Indisponivel</span>
-      </div>
-
       }
-      <div class="img">
-        <img src="{{ reserva.url }}" alt="" />
-      </div>
-      <div class="stars"></div>
     </div>
-    } 
   </div>
 </div>

@@ -4,32 +4,37 @@
       <div class="user" routerLink="/home">
         <fa-icon [icon]="faArrowLeft"></fa-icon>
       </div>
-      <img
-        src={{hotelSelected[0].url}}
-        alt=""
-      />
+      <img src="{{ hotelSelected[0].url }}" alt="" />
     </div>
 
-    <div class="stars">* * * * *</div>
+    <div class="stars">
+      <span
+        class="star"
+        *ngFor="let isFilled of getStarsArray(hotelSelected[0].stars)"
+        [ngClass]="{ filled: isFilled }"
+        >★</span
+      >
+    </div>
     <div class="details">
-      {{hotelSelected[0].status}}
+      {{ hotelSelected[0].status }}
     </div>
     <form [formGroup]="form" (submit)="reservar()">
-    <div class="title">
-      <h1>{{hotelSelected[0].local}}</h1>
-      <div class="sub">
-        <span>BAHEA - BA</span>
+      <div class="title">
+        <h1>{{ hotelSelected[0].local }}</h1>
+        <div class="sub">
+          <!-- <span>BAHEA - BA</span> -->
+        </div>
       </div>
-    </div>
-    <div class="price">
-      R${{hotelSelected[0].preco}},00
-    </div>
+      <div class="price">R${{ hotelSelected[0].preco }},00</div>
 
-      <div class="date">
-        <input type="date" formControlName="date">
-      </div>
+      <mat-form-field>
+        <mat-label>Choose a date</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="date">
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
       <input type="submit" value="RESERVAR" />
     </form>
   </div>
-
 </div>

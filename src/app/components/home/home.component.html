@@ -18,10 +18,11 @@
       </span>
     </div>
     @if (isLoadign) {
-      <span>Carregando...</span>
+      <mat-spinner></mat-spinner>
+
     }
     @else if (!isLoadign) {
-
+      <div class="card_container">
       @for (hotel of hoteisFiltrados; track $index) {
         <div class="card" [routerLink]="'/reserva'" [queryParams]="{id:hotel.id}">
           <div class="name">
@@ -45,6 +46,7 @@
       }@empty {
         <span>Nenhum hotel encontrado...</span>
       }
+    </div>
     }
   </div>
 </div>

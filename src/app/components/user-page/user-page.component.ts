@@ -43,7 +43,6 @@ export class UserPageComponent {
     this.router.navigateByUrl('/login');
   }
   ngOnInit() {
-    // localStorage.clear()
     this.getAllReservas();
   }
   getAllReservas() {
@@ -52,7 +51,6 @@ export class UserPageComponent {
         this.allReservas = data.data;
         for(let i = 0;this.allReservas.length > i; i++){
           this.reservasTratado = [...this.allReservas]
-          const date = new Date(this.allReservas[i].date);
           const [year, month, day] = this.allReservas[i].date.split('-').map(Number); // Extrai ano, mês e dia
           // Converte a string para Date
           const formattedDate = `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`;

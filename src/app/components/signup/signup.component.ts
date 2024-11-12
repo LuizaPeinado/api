@@ -7,17 +7,22 @@ import {
   FormBuilder,
   FormControl,
   FormGroup,
+  FormGroupDirective,
   FormsModule,
+  NgForm,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { HotelService } from '../../services/hotel-service';
+import { ErrorStateMatcher } from '@angular/material/core';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @Component({
   selector: 'app-signup',
   standalone: true,
-  imports: [ReactiveFormsModule, FontAwesomeModule, RouterLink],
+  imports: [ReactiveFormsModule, FontAwesomeModule, RouterLink,MatFormFieldModule, MatInputModule],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.scss',
 })
@@ -29,11 +34,14 @@ export class SignupComponent {
   router = inject(Router);
   hotelService = inject(HotelService)
 
+  matcher = new MyErrorStateMatcher();
+
+
   constructor(private userService: UserService) {}
 
   userForm = this.fb.group({
     name: new FormControl<string>('', [Validators.required]),
-    email: new FormControl<string>('', [Validators.required]),
+    email: new FormControl<string>('', [Validators.required, Validators.pattern(/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/)]),
     password: new FormControl<string>('', [Validators.required]),
   });
 
@@ -77,3 +85,17 @@ export class SignupComponent {
     }
   }
 }
+export class MyErrorStateMatcher implements ErrorStateMatcher {
+  isErrorState(
+    control: FormControl | null,
+    form: FormGroupDirective | NgForm | null
+  ): boolean {
+    const isSubmitted = form && form.submitted;
+    return !!(
+      control &&
+      control.invalid &&
+      (control.dirty || control.touched || isSubmitted)
+    );
+  }
+}
+

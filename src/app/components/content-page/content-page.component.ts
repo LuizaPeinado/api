@@ -4,6 +4,11 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faSearch, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { HotelService } from '../../services/hotel-service';
 import { Hotel } from '../../interfaces/hotel';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {provideNativeDateAdapter} from '@angular/material/core';
+
 import {
   FormBuilder,
   FormControl,
@@ -11,10 +16,12 @@ import {
   Validators,
 } from '@angular/forms';
 import { ReservaHotel } from '../../services/reserva.service';
+import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-content-page',
   standalone: true,
-  imports: [FontAwesomeModule, RouterLink, ReactiveFormsModule],
+  providers: provideNativeDateAdapter(),
+  imports: [FontAwesomeModule, RouterLink, ReactiveFormsModule,CommonModule,MatFormFieldModule, MatInputModule, MatDatepickerModule],
   templateUrl: './content-page.component.html',
   styleUrl: './content-page.component.scss',
 })
@@ -48,10 +55,7 @@ export class ContentPageComponent implements OnInit {
     for (let i = 0; this.allHotel.length > i; i++) {
       console.log(this.allHotel[i].id, id)
       if(this.allHotel[i].id === id){
-        console.log("AChouu")
         this.hotelSelected.push(this.allHotel[i])
-      }else{
-        console.log("not found")
       }
     }
   }
@@ -70,7 +74,7 @@ export class ContentPageComponent implements OnInit {
       .createReserva({
         idUser:id,
         idHotel:idHotel,
-        date: this.form.value.date!,
+        date: this.form.value.date!
       })
       .subscribe({
         next: (data) => {
@@ -81,5 +85,10 @@ export class ContentPageComponent implements OnInit {
 
         error: (err) => console.log(err),
       });
+  }
+  getStarsArray(stars: number): boolean[] {
+    return Array(5)
+      .fill(false)
+      .map((_, index) => index < stars);
   }
 }
