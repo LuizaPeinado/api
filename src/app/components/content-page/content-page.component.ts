@@ -61,7 +61,6 @@ export class ContentPageComponent implements OnInit {
 
   ngOnInit() {
     this.getAllHotel();
-    this.openSnackBar()
   }
   getId() {
     this.router.queryParams.subscribe((params) => {

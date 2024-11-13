@@ -6,7 +6,7 @@ import { Hotel } from '../interfaces/hotel';
   providedIn: 'root'
 })
 export class HotelService {
-  private url = 'https://8011-2804-389-77-bc4e-b5d8-f54a-8b52-ccab.ngrok-free.app/hotel'
+  private url = 'https://a28c-2804-214-90ec-4d55-c16c-8438-cbf-72b7.ngrok-free.app/hotel'
 
 
   constructor(private http:HttpClient) { }
