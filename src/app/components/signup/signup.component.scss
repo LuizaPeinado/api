@@ -1,6 +1,6 @@
 @import "../../../styles.scss";
 
-.container{
+.container {
   width: 100%;
   height: 100vh;
   display: flex;
@@ -8,52 +8,59 @@
   justify-content: center;
   background: $gradient;
 }
-.imageContainer{
+.imageContainer {
   width: 400px;
   height: 500px;
-  background:url("/bg.jpg") ;
+  background: url("/bg.jpg");
   background-size: cover;
   border-top-left-radius: 20px;
   box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.199);
   border-bottom-left-radius: 20px;
 }
-.content{
+.content {
   width: 400px;
   height: 500px;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  background:$gradient ;
+  background: $gradient;
   overflow: hidden;
   border-top-right-radius: 20px;
   border-bottom-right-radius: 20px;
   box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.123);
 
-
-  h1{
+  h1 {
     color: $primary;
     font-size: 3rem;
-    margin-bottom: 50px;
+    margin-bottom: 10px;
   }
-  form{
+  form {
     width: 400px;
     display: flex;
     flex-direction: column;
     align-items: center;
     position: relative;
     justify-content: center;
-    gap: 20px;
-    input[type="text"],input[type="password"]{
+    gap: 5px;
+    mat-form-field {
+      height: 75px;
+    }
+    input[type="text"],
+    input[type="password"],
+    input[type="email"] {
       border: none;
       width: 200px;
       background-color: transparent;
       padding: 5px;
-      &:focus{
+      &::placeholder {
+        font-size: 12px;
+      }
+      &:focus {
         outline: none;
       }
     }
-    .icon{
+    .icon {
       position: absolute;
       background-color: $primary;
       width: 25px;
@@ -65,54 +72,59 @@
       color: white;
       left: 75px;
     }
-    label{
+    label {
       color: $primary;
-      font-size: .9rem;
+      font-size: 0.9rem;
       margin-top: 20px;
     }
-    .username, .password{
+    .username,
+    .password {
       display: flex;
     }
-    input[type="submit"]{
+    input[type="submit"] {
       width: 200px;
       height: 35px;
-      border-radius:30px;
+      border-radius: 30px;
       border: none;
       background-color: $primary;
       color: white;
-      &:hover{
+      &::placeholder {
+        font-size: 12px;
+      }
+      &:hover {
         cursor: pointer;
-        opacity: .8;
+        opacity: 0.8;
       }
     }
-    .forgot{
+    .forgot {
       color: $primary;
-      font-size: .7rem;
+      font-size: 0.7rem;
       margin-top: 13px;
     }
-
   }
-  .signup{
+  .signup {
     color: $primary;
-    font-size: .8rem;
+    font-size: 0.8rem;
     margin-top: 13px;
   }
-  .link{
+  .link {
     cursor: pointer;
   }
 }
 
-::ng-deep .mat-mdc-form-field{
-  --mdc-filled-text-field-caret-color:rgb(65, 77, 147);
-  --mdc-filled-text-field-input-text-placeholder-color:rgb(152, 152, 152);
-  --mdc-filled-text-field-container-color:rgba(235, 27, 27, 0);
+::ng-deep .mat-mdc-form-field {
+  --mdc-filled-text-field-caret-color: rgb(65, 77, 147);
+  --mdc-filled-text-field-input-text-placeholder-color: rgb(152, 152, 152);
+  --mdc-filled-text-field-container-color: rgba(235, 27, 27, 0);
+  --mdc-filled-text-field-label-text-size: 14px;
+  --mdc-filled-text-field-input-placeholder-size: 12px;
 }
 
 @media (width <= 815px) {
-  .imageContainer{
+  .imageContainer {
     display: none;
   }
-  .content{
+  .content {
     height: 100vh;
     width: 100%;
   }

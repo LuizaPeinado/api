@@ -7,7 +7,7 @@
   padding-bottom: 50px;
   .header{
     width: 100%;
-    height: 200px;
+    height: 230px;
     background-color: $primary;
     border-bottom-right-radius: 70%;
     border-bottom-left-radius: 30%;
@@ -19,14 +19,14 @@
     .user{
       position: absolute;
       right: 0;
-      top: 0;
+      top: 20px;
       margin: 40px;
       cursor: pointer;
     }
     .menu{
       position: absolute;
       left: 0;
-      top: 0;
+      top: 20px;
       margin: 40px;
       cursor: pointer;
     }
@@ -66,6 +66,9 @@
       position: relative;
       margin-top: 30px;
       overflow: hidden;
+      .date{
+        color: gray;
+      }
       .img{
         height: 80%;
         border-top-right-radius: 20px;

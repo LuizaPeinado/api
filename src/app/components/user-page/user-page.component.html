@@ -16,7 +16,7 @@
     </div>
     <div class="card_container">
       @if (isLoadign) {
-        <mat-spinner></mat-spinner>
+        <mat-spinner  [diameter]="50"></mat-spinner>
   
       }
       @else if (!isLoadign) {
@@ -35,12 +35,12 @@
               <div class="status off">
                 <span>Indisponivel</span>
               </div>
-              
             }
             <div class="img">
               <img src="{{ reserva.url }}" alt="" />
             </div>
             <div class="stars"></div>
+            <div class="date">{{reserva.date}}</div>
           </div>
         }
       }

@@ -42,7 +42,9 @@
       position: relative;
       justify-content: center;
       gap: 20px;
-
+      mat-form-field {
+        height: 75px;
+      }
       
       input[type="text"],
       input[type="password"] {
@@ -50,6 +52,9 @@
         width: 200px;
         background-color: transparent !important;
         padding: 5px;
+        &::placeholder {
+          font-size: 12px;
+        }
         &:focus {
           outline: none;
           // border-bottom: 2px solid $hover;
@@ -83,6 +88,7 @@
         border: none;
         background-color: $primary;
         color: white;
+      
         &:hover {
           cursor: pointer;
           opacity: 0.8;
@@ -108,6 +114,15 @@
   --mdc-filled-text-field-caret-color:rgb(65, 77, 147);
   --mdc-filled-text-field-input-text-placeholder-color:rgb(152, 152, 152);
   --mdc-filled-text-field-container-color:rgba(235, 27, 27, 0);
+  --mdc-filled-text-field-label-text-size:14px;
+
+}
+::ng-deep .snackbar-1{
+  --mdc-snackbar-container-color:rgb(173, 83, 81);
+  --mdc-snackbar-supporting-text-color:rgb(234, 234, 234);
+}
+::ng-deep .snackbar-1 button{
+  --mat-mdc-snack-bar-button-color:rgb(234, 234, 234);
 }
 
 @media (width <= 815px) {

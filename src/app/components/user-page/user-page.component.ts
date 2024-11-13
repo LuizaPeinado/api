@@ -86,7 +86,6 @@ export class UserPageComponent {
     const id = Number(this.idUser);
 
     for (let i = 0; this.allReservas.length > i; i++) {
-      console.log("aqui")
       if (this.allReservas[i].idUser === id) {
         this.userReservas.push(this.allReservas[i]);
         for (let j = 0; this.allHotel.length > j; j++) {
@@ -99,13 +98,11 @@ export class UserPageComponent {
     for(let i = 0;this.userReservas.length > i; i++){
       this.userReservas[i] = {"id": this.userReservas[i].id,"idUser":this.userReservas[i].idUser,"idHotel":this.userReservas[i].idHotel,"url":this.userHoteis[i].url,"local":this.userHoteis[i].local,"date":this.userReservas[i].date}
     }
-    console.log(this.userReservas)
   }
   getUsername() {
     const id = Number(this.idUser);
     for (let i = 0; this.allUsers.length > i; i++) {
       if (this.allUsers[i].id === id) {
-        console.log('Achooo');
         this.userName = this.allUsers[i].name;
       } else {
       }

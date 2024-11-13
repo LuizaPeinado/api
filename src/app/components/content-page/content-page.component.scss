@@ -75,3 +75,8 @@
     }
   }
 }
+
+::ng-deep .snackbar-1{
+  --mdc-snackbar-container-color:rgb(86, 161, 86);
+  --mdc-snackbar-supporting-text-color:rgb(234, 234, 234);
+}

@@ -8,6 +8,13 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { provideNativeDateAdapter } from '@angular/material/core';
+import {
+  MatSnackBar,
+  MatSnackBarHorizontalPosition,
+  MatSnackBarVerticalPosition,
+} from '@angular/material/snack-bar';
+import {MatButtonModule} from '@angular/material/button';
+import {MatSelectModule} from '@angular/material/select';
 
 import {
   FormBuilder,
@@ -44,13 +51,17 @@ export class ContentPageComponent implements OnInit {
   fb = inject(FormBuilder);
   reservaService = inject(ReservaHotel);
   idUser = localStorage.getItem('angularToken')!;
+  private _snackBar = inject(MatSnackBar);
 
+  horizontalPosition: MatSnackBarHorizontalPosition = 'start';
+  verticalPosition: MatSnackBarVerticalPosition = 'top';
   form = this.fb.group({
     date: '',
   });
 
   ngOnInit() {
     this.getAllHotel();
+    this.openSnackBar()
   }
   getId() {
     this.router.queryParams.subscribe((params) => {
@@ -61,7 +72,6 @@ export class ContentPageComponent implements OnInit {
   foundHotel(id: any) {
     id = Number(id);
     for (let i = 0; this.allHotel.length > i; i++) {
-      console.log(this.allHotel[i].id, id);
       if (this.allHotel[i].id === id) {
         this.hotelSelected.push(this.allHotel[i]);
       }
@@ -71,7 +81,6 @@ export class ContentPageComponent implements OnInit {
   getAllHotel() {
     this.hotelService.getAllHotel().subscribe((response) => {
       this.allHotel = response.data;
-      console.log(this.allHotel[0]);
       this.getId();
     });
   }
@@ -94,9 +103,8 @@ export class ContentPageComponent implements OnInit {
       })
       .subscribe({
         next: (data) => {
-          alert('Reserva Realizada');
+          this.openSnackBar()
           this.form.reset();
-          console.log('Reserva criada!', data);
         },
 
         error: (err) => console.log(err),
@@ -106,5 +114,13 @@ export class ContentPageComponent implements OnInit {
     return Array(5)
       .fill(false)
       .map((_, index) => index < stars);
+  }
+  openSnackBar() {
+    this._snackBar.open('Reserva realizada', '-', {
+      horizontalPosition: this.horizontalPosition,
+      verticalPosition: this.verticalPosition,
+      duration: 3000,
+      panelClass:['snackbar-1']
+    });
   }
 }

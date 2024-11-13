@@ -18,6 +18,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
+import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-login',
@@ -33,7 +34,10 @@ export class LoginComponent {
   fb = inject(FormBuilder);
   route = inject(Router);
   idUser: Number = 0;
+  private _snackBar = inject(MatSnackBar);
 
+  horizontalPosition: MatSnackBarHorizontalPosition = 'start';
+  verticalPosition: MatSnackBarVerticalPosition = 'top';
   constructor(private userService: UserService) {}
 
   userForm = this.fb.group({
@@ -65,12 +69,21 @@ export class LoginComponent {
       ) {
         localStorage.setItem('angularToken', this.allUsers[i].id!.toString());
         this.route.navigateByUrl('/home');
-        console.log('Esse usuario tem hein');
         this.userForm.reset();
         return;
       }
     }
     this.userForm.reset();
+    this.openSnackBar()
+
+  }
+  openSnackBar() {
+    this._snackBar.open('Dados invalidos!', '-', {
+      horizontalPosition: this.horizontalPosition,
+      verticalPosition: this.verticalPosition,
+      duration: 3000,
+      panelClass:['snackbar-1']
+    });
   }
 }
 export class MyErrorStateMatcher implements ErrorStateMatcher {
