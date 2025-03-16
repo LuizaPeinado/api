@@ -1,7 +1,0 @@
-{
-    "/**":{
-        "target":"htts://localhost:3000",
-        "secure":true,
-        "changeOrigin":false
-    }
-}
